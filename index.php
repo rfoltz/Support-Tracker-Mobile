@@ -8,7 +8,7 @@
 	File description: This is the jQuery Mobile Web App for the support tracker website.
 	-->
 
-	<title>Support Tracker</title>
+	<title>Support Tracker - Home</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Mobile CSS -->
@@ -21,16 +21,13 @@
 </head>
 
 <body>
-	<!-- Every Item usually uses my custom theme "a" which was created using themeroller -->
-
-	<!--Contact Page -->
-	<div data-role="page" data-theme="a" id="contact-page">
+	<!-- Home Page -->
+	<div data-role="page" data-theme="a" id="home-page">
 		<!--Page header -->
 		<header data-role="header">
             <h1>Home</h1>
         </header><!-- /header -->
-        <!--Saved my logo as a SVG file to save space. -->
-    	<object id="logo-svg" data="imgs/logo-black.svg" type="image/svg+xml"></object>
+        <h1 style="text-align:center;">Support Tracker</h1>
 		<!--Here's the nav bar it's just a gird with 2 buttons.-->
 		<div class="ui-grid-a">
 			<div class="ui-block-a"><a class="ui-btn-active" href="index.php" data-role="button" data-mini="true" data-icon="home" data-iconpos="top" data-corners="false" data-theme="a">Home</a></div>

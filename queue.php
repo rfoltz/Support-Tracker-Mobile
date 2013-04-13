@@ -14,10 +14,10 @@
 <html>
 <head>
 	<!--
-	File name: login.php
+	File name: queue.php
 	Author's name: Robert Foltz
 	Web site name: www.robertfoltz.com/mobile
-	File description: This is the jQuery Mobile Web App for the support tracker website.
+	File description: This is the jQuery Mobile Web App for the support tracker website. This page displays the tickets in the queue
 	-->
 
 	<title>Support Tracker - Ticket Queue</title>
@@ -33,16 +33,13 @@
 </head>
 
 <body>
-	<!-- Every Item usually uses my custom theme "a" which was created using themeroller -->
-
-	<!--Contact Page -->
-	<div data-role="page" data-theme="a" id="contact-page">
+	<!-- Ticket Queue Page -->
+	<div data-role="page" data-theme="a" id="ticket-queue-page">
 		<!--Page header -->
 		<header data-role="header">
             <h1>Ticket Queue</h1>
         </header><!-- /header -->
-        <!--Saved my logo as a SVG file to save space. -->
-    	<object id="logo-svg" data="imgs/logo-black.svg" type="image/svg+xml"></object>
+        <h1 style="text-align:center;">Support Tracker</h1>
 		<!--Here's the nav bar it's just a gird with 2 buttons.-->
 		<div class="ui-grid-a">
 			<div class="ui-block-a"><a href="create-ticket.php" data-role="button" data-mini="true" data-icon="home" data-iconpos="top" data-corners="false" data-theme="a">Create Ticket</a></div>
