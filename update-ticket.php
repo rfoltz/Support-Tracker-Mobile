@@ -116,6 +116,9 @@
 				<label for="issue"><span class="alert">*</span>Question/Issue:</label>
 				<textarea name="issue" id="issue" class="textareas"><?php echo($ticket_info['Issue']); ?></textarea><br>
 				
+				<label>Log:</label><br>
+				<textarea id="log" class="textareas"><?php echo($ticket_info['Log']); ?></textarea><br>
+				
 				<!--Holds button the user clicked. Also this defaults to update just incase the user hits enter.-->
 				<input type="hidden" name="choice" id="choice" value="update">
 				<input type="submit" name="update" id="update" value="Update">

@@ -6,6 +6,9 @@ File Description: This is the page does the AJAXing to the update ticket handler
 */
 
 $(document).ready(function() {
+	$('#log').textinput( "disable" ); //disable the log textarea.
+
+
 	/** Login Form Submission
 	 *		Handles form validation and AJAXing to server.
 	 */

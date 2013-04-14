@@ -11,5 +11,5 @@ File Description: has some CSS for the mobile app.
 }
 
 .textareas {
-	height: 150px !important;
+	min-height: 150px !important;
 }

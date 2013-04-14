@@ -15,8 +15,18 @@ File Description: This is the page that handles the form when updating a ticket.
 	
 	if(isset($_POST['choice']) && $_POST['choice'] == "update") { // get the button choice
 		//Create a prepared statement to UPDATE a ticket 
-		$stmt = $db->prepare('UPDATE tickets SET Updated=?, CEmail=?, CName=?, CCountry=?, Issue=?, Technician=?, Category=? WHERE Num = ?');
-		$stmt->bindValue(1, date("Y-m-d H:i:s"));
+		$rightnow = date("Y-m-d H:i:s");
+		
+		$stmt = $db->prepare('select Log from tickets WHERE Num = ?');
+		$stmt->bindValue(1, $_POST['ticket-num']);
+		$stmt->execute();
+		
+		$ticket_info = $stmt->fetch();
+		$log = $ticket_info['Log'].'Updated at '.$rightnow.' By '.$_SESSION['Firstname']." ".$_SESSION['Lastname']."\n";
+		
+		
+		$stmt = $db->prepare('UPDATE tickets SET Updated=?, CEmail=?, CName=?, CCountry=?, Issue=?, Technician=?, Category=?, Log=?  WHERE Num = ?');
+		$stmt->bindValue(1, $rightnow);
 		$stmt->bindValue(2, $_POST['email']);
 		$stmt->bindValue(3, $_POST['name']);
 		$stmt->bindValue(4, $_POST['country']);
@@ -29,7 +39,8 @@ File Description: This is the page that handles the form when updating a ticket.
 			$stmt->bindValue(6, $_POST['technician']);
 		}
 		$stmt->bindValue(7, $_POST['category']);
-		$stmt->bindValue(8, $_POST['ticket-num']);
+		$stmt->bindValue(8, $log);
+		$stmt->bindValue(9, $_POST['ticket-num']);
 	
 		$sucessful = $stmt->execute(); // execute statement
 		
@@ -57,8 +68,20 @@ File Description: This is the page that handles the form when updating a ticket.
 			$json_data['message'] = 'Hmm Something went wrong...';
 		}
 	} else if(isset($_POST['choice']) && $_POST['choice'] == "complete") {
-		//Create a prepared statement to UPDATE a ticket 
-		$stmt = $db->prepare('UPDATE tickets SET Updated=?, CEmail=?, CName=?, CCountry=?, Issue=?, Technician=?, Category=?, Completed = "Y" WHERE Num = ?');
+		//Create a prepared statement to UPDATE a ticket
+		$rightnow = date("Y-m-d H:i:s");
+		
+		//get the ticket we are updating and get the log.
+		$stmt = $db->prepare('select Log from tickets WHERE Num = ?');
+		$stmt->bindValue(1, $_POST['ticket-num']);
+		$stmt->execute();
+		
+		$ticket_info = $stmt->fetch();
+		//append to the new log.
+		$log = $ticket_info['Log'].'Completed at '.$rightnow.' By '.$_SESSION['Firstname']." ".$_SESSION['Lastname']."\n";
+		
+		
+		$stmt = $db->prepare('UPDATE tickets SET Updated=?, CEmail=?, CName=?, CCountry=?, Issue=?, Technician=?, Category=?, Completed = "Y", Log = ? WHERE Num = ?');
 		$stmt->bindValue(1, date("Y-m-d H:i:s"));
 		$stmt->bindValue(2, $_POST['email']);
 		$stmt->bindValue(3, $_POST['name']);
@@ -72,7 +95,8 @@ File Description: This is the page that handles the form when updating a ticket.
 			$stmt->bindValue(6, $_POST['technician']);
 		}
 		$stmt->bindValue(7, $_POST['category']);
-		$stmt->bindValue(8, $_POST['ticket-num']);
+		$stmt->bindValue(8, $log);
+		$stmt->bindValue(9, $_POST['ticket-num']);
 	
 		$sucessful = $stmt->execute();
 		
