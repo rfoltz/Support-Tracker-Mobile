@@ -10,9 +10,12 @@ File Description: This is the page that actually creates a ticket in the databas
 	require_once('dbConnection.php');	
 	// 
 	$json_data = array();
+	
+	//Create the log statement.
+	$log = 'Created at '.date("Y-m-d H:i:s").' By '.$_SESSION['Firstname']." ".$_SESSION['Lastname']."\n";
 		
 	//Create a prepared INSERT statement
-	$stmt = $db->prepare('INSERT INTO tickets (Created, Updated, CEmail, CName, CCountry, Issue, Technician, Category) VALUES (?,?,?,?,?,?,?,?)');
+	$stmt = $db->prepare('INSERT INTO tickets (Created, Updated, CEmail, CName, CCountry, Issue, Technician, Category, Log) VALUES (?,?,?,?,?,?,?,?,?)');
 	$stmt->bindValue(1, date("Y-m-d H:i:s"));
 	$stmt->bindValue(2, date("Y-m-d H:i:s"));
 	$stmt->bindValue(3, $_POST['email']);
@@ -27,6 +30,7 @@ File Description: This is the page that actually creates a ticket in the databas
 		$stmt->bindValue(7, $_POST['technician']);
 	}
 	$stmt->bindValue(8, $_POST['category']);
+	$stmt->bindValue(9, $log);
 	$sucessful = $stmt->execute();
 	
 	//check to see if the statement executed successfully.
