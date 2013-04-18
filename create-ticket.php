@@ -42,7 +42,7 @@
 	<div data-role="page" data-theme="a" id="create-ticket-page">
 		<!--Page header -->
 		<header data-role="header">
-            <h1>Update Ticket</h1>
+            <h1>Create Ticket</h1>
         </header><!-- /header -->
         <h1 style="text-align:center;">Support Tracker</h1>
 		<!--Here's the nav bar it's just a gird with 2 buttons.-->

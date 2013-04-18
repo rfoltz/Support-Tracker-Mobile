@@ -16,6 +16,18 @@ if (!isset($_SESSION) || (!isset($_SESSION['UserID']) && !isset($_SESSION['First
   exit;
 }
 
+//check to see if the timeout variable is set
+if(isset($_SESSION['timeout'])) { // if it is then check to see if the user has been inactive for 10 minutes.
+	if ($_SESSION['timeout'] + 10 * 60 < time()) {
+		session_unset(); //unset all variables in the session
+		session_destroy(); //destroy the session
+		header("Location: login.php"); //redirect if the user hasn't been active for 10 minutes.
+		exit;
+	}
+}
+
+$_SESSION['timeout'] = time(); //set the last known activity time.
+
 if(isset($_GET["logout"])) //if the user wants to log out.
 {
 	if($_GET["logout"] == true) //just incase someone puts ?logout=false
