@@ -54,11 +54,18 @@
     	<!--Page content -->
         <section data-role="content">
         	<h1>Currently Assigned Tickets</h1>
+        	<?php 
+			if(count($ticket_info)  > 0)
+			{
+			?>
             <ul data-role="listview" data-filter="true" data-filter-placeholder="Search Ticket #..." data-inset="true">
 				<?php foreach ($ticket_info as $ticket) : ?>
 				<li><a href="update-ticket.php?number=<?php echo($ticket['Num']); ?>">Ticket #<?php echo($ticket['ticket_num']); ?></a></li>		
 				<?php endforeach; ?>
 			</ul>
+			<?php } else { ?>
+			<p>No tickets are currently assigned to you.<p>
+			<?php } ?>
         </section>
     
         <footer data-role="footer">

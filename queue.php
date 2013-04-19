@@ -2,12 +2,19 @@
 <?php require_once('dbConnection.php'); ?>
 
 <?php	
-	//Query database for all tickets assigned to the current user.
+	//Query database for all tickets not assigned to someone and not closed.
 	$stmt = $db->prepare('select *,LPAD(Num,7,"0") as ticket_num from tickets where technician is NULL and completed <> "Y" ');
 	$stmt->execute();
 	
 	// Grab the tickets
 	$ticket_info = $stmt->fetchAll();
+	
+	//Query database for all tickets that are closed
+	$stmt = $db->prepare('select *,LPAD(Num,7,"0") as ticket_num from tickets where completed = "Y" ');
+	$stmt->execute();
+	
+	// Grab the tickets
+	$closed_tickets = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html> 
@@ -53,11 +60,32 @@
     	<!--Page content -->
         <section data-role="content">
         	<h1>Tickets in Queue</h1>
+        	<?php 
+			if(count($ticket_info)  > 0)
+			{
+			?>
             <ul data-role="listview" data-filter="true" data-filter-placeholder="Search Ticket #..." data-inset="true">
 				<?php foreach ($ticket_info as $ticket) : ?>
 				<li><a href="update-ticket.php?number=<?php echo($ticket['Num']); ?>">Ticket #<?php echo($ticket['ticket_num']); ?></a></li>		
 				<?php endforeach; ?>
 			</ul>
+			<?php } else { ?>
+			<p>There are currently no tickets in the queue!</p>
+			<?php } ?>
+			
+			<h1>Closed Tickets</h1>
+        	<?php 
+			if(count($closed_tickets)  > 0)
+			{
+			?>
+            <ul data-role="listview" data-filter="true" data-filter-placeholder="Search Ticket #..." data-inset="true">
+				<?php foreach ($closed_tickets as $ticket) : ?>
+				<li><a href="update-ticket.php?number=<?php echo($ticket['Num']); ?>">Ticket #<?php echo($ticket['ticket_num']); ?></a></li>		
+				<?php endforeach; ?>
+			</ul>
+			<?php } else { ?>
+			<p>There are currently no closed tickets</p>
+			<?php } ?>
         </section>
     
         <footer data-role="footer">

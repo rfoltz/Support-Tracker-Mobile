@@ -123,7 +123,11 @@
 				<input type="hidden" name="choice" id="choice" value="update">
 				<input type="submit" name="update" id="update" value="Update">
 				<input type="submit" name="delete" id="delete" value="Delete">
-				<input type="submit" name="complete" id="complete" value="Completed">
+				<?php if($ticket_info['Completed'] == "N") { ?>
+				<input type="submit" name="close" id="close" class="spaced" value="Close">
+				<?php } else {?>
+				<input type="submit" name="reopen" id="reopen" class="spaced" value="Reopen">
+				<?php }?>
 			</form>
         </section>
     
